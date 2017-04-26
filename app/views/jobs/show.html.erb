@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="col-md-12 show">
+    <%= link_to(jobs_path, class: "btn btn-default back-btn") do  %>
+    <span class="fa fa-arrow-left" style="margin-right: 10px;"></span>返回概念列表
+    <% end %>
+    <h2 class="job_title"><%= @job.title %></h2>
+
+    <p class="info">
+      <b>践行时长</b>
+      <span class="salary">
+        <span class="label label-success"><%= @job.wage_lower_bound %>天</span>
+        -
+        <span class="label label-success"><%= @job.wage_upper_bound %>天</span>
+      </span>&nbsp
+
+      <span>
+        &nbsp<span class="fa fa-clock-o">&nbsp</span><%= formatDate(@job.created_at) %>
+        发布</span>
+    </p>
+
+    <p class="send-resume">
+      <%= render 'resume_btn', :job => @job %>
+    </p>
+
+    <hr>
+
+    <p class="description-title">
+      <strong>概念详情：</strong>
+    </p>
+    <p class="description"></p>
+    <%= render_job_description(@job) %>
+  </div>
+</div>

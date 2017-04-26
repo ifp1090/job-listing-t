@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="jobs-container">
+    <div class="content">
+      <ul class="nav nav-tabs">
+        <li class="<%= 'active' if !params[:order] %>">
+          <%= link_to("默认排序", jobs_path) %>
+        </li>
+        <li <li class="<%= 'active' if params[:order] == 'by_lower_bound' %>"> <%= link_to("按最低践行时段排序", jobs_path(:order => "by_lower_bound" )) %></li>
+        <li <li class="<%= 'active' if params[:order] == 'by_upper_bound' %>"> <%= link_to("按最高践行时段排序", jobs_path(:order => "by_upper_bound" )) %></li>
+      </ul>
+
+      <table class="table table-hover table-boldered table-striped">
+        <thead>
+          <tr>
+            <th>概念名称</th>
+            <th>践行城市</th>
+            <th>践行时限</th>
+            <th>发布时间</th>
+            <% if !current_user || !current_user.is_admin? %>
+            <th>申请践行</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @jobs.each do |job| %>
+          <tr>
+            <td><%= link_to(job.title, job_path(job)) %></td>
+            <td><%= link_to(job.category_name, "/jobs/search?utf8=✓&q=" + job.category_name) %></td>
+            <td>
+              <span class="label label-default"><%= job.wage_lower_bound %>天 -
+                <%= job.wage_upper_bound %>天</span>
+            </td>
+            <td><%= formatDate(job.created_at) %></td>
+            <% if !current_user || !current_user.is_admin? %>
+            <td><%= render 'resume_btn', :job => job %>
+            </td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%= will_paginate @jobs %>
+      </div>
+    </div>
+  </div>
+</div>

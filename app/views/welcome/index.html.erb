@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>OUTPOST</title>
+    <link href="app/assets/stylesheets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/assets/stylesheets/css/animate.min.css" rel="stylesheet">
+    <link href="app/assets/stylesheets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="app/assets/stylesheets/css/lightbox.css" rel="stylesheet">
+    <link href="app/assets/stylesheets/css/main.css" rel="stylesheet">
+    <link id="css-preset" href="app/assets/stylesheets/css/presets/preset1.css" rel="stylesheet">
+    <link href="app/assets/stylesheets/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]> <script src="js/html5shiv.js"></script> <script src="js/respond.min.js"></script> <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="app/assets/images/images/favicon.ico">
+  </head>
+  <!--/head-->
+
+  <body>
+
+    <!--.preloader-->
+    <div class="preloader">
+      <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
+    <!--/.preloader-->
+
+    <header id="home">
+      <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="item active" style="background-image: url(https://ooo.0o0.ooo/2017/04/25/58feb9e83a542.jpg)">
+            <div class="caption">
+              <h1 class="animated fadeInLeftBig">淡定的相信一个残缺的世界可以至少容纳下一个残缺的人
+                <span>
+                  <br/>
+                  <s>「完美主义」</s>
+                </span>
+              </h1>
+              <p class="animated fadeInRightBig">Calmly believe that a incomplete world can accommodate at least one incomplete person.</p>
+              <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">了解更多</a>
+            </div>
+          </div>
+          <div class="item" style="background-image: url(https://ooo.0o0.ooo/2017/04/25/58febe01a3d90.jpg)">
+            <div class="caption">
+              <h1 class="animated fadeInLeftBig">确信自己的判断，反对我的人越多越好
+                <br/>
+                <span>「特立独行且正确」</span>
+              </h1>
+              <p class="animated fadeInRightBig">Be sure that your judgment is, the more you are against me.</p>
+              <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">了解更多</a>
+            </div>
+          </div>
+          <div class="item" style="background-image: url(https://ooo.0o0.ooo/2017/04/25/58febe4b68217.jpg)">
+            <div class="caption">
+              <h1 class="animated fadeInLeftBig">相信自己会有好运是创造
+                <span>「Serendipity」</span><br/>的有效方法论
+              </h1>
+              <p class="animated fadeInRightBig">I believe that there will be good luck is to create a pleasant surprise method.</p>
+              <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">了解更多</a>
+            </div>
+          </div>
+        </div>
+        <a class="left-control" href="#home-slider" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="right-control" href="#home-slider" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+
+        <a id="tohash" href="#services">
+          <i class="fa fa-angle-down"></i>
+        </a>
+
+      </div>
+      <!--/#home-slider-->
+      <div class="main-nav">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+              <h1><img class="img-responsive" src="https://farm3.staticflickr.com/2836/33413995644_eeab788254_o.png" alt="OUTPOST"></h1>
+            </a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="scroll active">
+                <a href="#home">首页</a>
+              </li>
+              <li><%= link_to('工作列表', jobs_path) %></li>
+              <ul class="nav navbar-nav navbar-right">
+                <% if !current_user %>
+                <li><%= link_to("注册", new_user_registration_path) %></li>
+                <li><%= link_to("登入", new_user_session_path) %></li>
+              <% else %>
+                <% if current_user && current_user.admin? %>
+                <li><%= link_to("管理后台", admin_account_jobs_path) %></li>
+              <% else %>
+                <li><%= link_to("已投递简历的工作", account_jobs_path) %></li>
+                <% end %>
+                <li><%= link_to("登出", destroy_user_session_path, method: :delete) %></li>
+              </li>
+              <% end %>
+            </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/#main-nav-->
+</header>
+<!--/#home-->
+<section id="services">
+  <div class="container">
+    <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+      <div class="row">
+        <div class="text-center col-sm-8 col-sm-offset-2">
+          <h2>我们的愿景</h2>
+          <p>
+            OUTPOST立志成为中国最具践行力的概念打磨团队，拥有及其清晰且必要的概念与方法论。
+            <br>
+            通过刻意训练努力将自己打磨成为自己和他人的双重贵人</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center our-services">
+      <div class="row">
+        <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+          <div class="service-icon">
+            <i class="fa fa-check-square-o"></i>
+          </div>
+          <div class="service-info">
+            <h3>选择力</h3>
+            <p>添加必要的条件是正确选择的关键。<br/>你的价值观会影响筛选时所添加的必要条件，而所选结果又会反过来影响你的价值观。</p>
+          </div>
+        </div>
+        <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="450ms">
+          <div class="service-icon">
+            <i class="fa fa-credit-card"></i>
+          </div>
+          <div class="service-info">
+            <h3>付费力</h3>
+            <p>将注意力放到能提升自身能力的事情上。<br/>为其赋予伟大意义逼自己拿出注意力与时间，进而拿钱去换取注意力与时间。</p>
+          </div>
+        </div>
+        <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="550ms">
+          <div class="service-icon">
+            <i class="fa fa-trash-o"></i>
+          </div>
+          <div class="service-info">
+            <h3>放弃力</h3>
+            <p>百分之百安全带来的是百分之百的束缚。<br/>主动放弃现有的安全感是自身成长突破的关键，作出自己的决定并为其负全责。</p>
+          </div>
+        </div>
+        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="650ms">
+          <div class="service-icon">
+            <i class="fa fa-clone"></i>
+          </div>
+          <div class="service-info">
+            <h3>模仿力</h3>
+            <p>从开始就像大牛一样生活。<br/>最好的模仿不是向大牛学习，而是从一开始就按大牛的标准要求自己，绝不拿自己当业余选手。</p>
+          </div>
+        </div>
+        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="750ms">
+          <div class="service-icon">
+            <i class="fa fa-hand-rock-o"></i>
+          </div>
+          <div class="service-info">
+            <h3>耐压力</h3>
+            <p>成长过程中所遭遇到的所有的阻力与误会都是必经之路。<br/>默认没人支持你，<br/>把别人的鼓励都当做是额外赠送的。</p>
+          </div>
+        </div>
+        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="850ms">
+          <div class="service-icon">
+            <i class="fa fa-binoculars"></i>
+          </div>
+          <div class="service-info">
+            <h3>预测力</h3>
+            <p>尊重事实与相信逻辑是预测未来的两大基石。<br/>笃信自己的预测结果并按那个预测去行动、选择与思考，终将证明预测正确。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/#services-->
+<section id="about-us" class="parallax">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+          <h2>欢迎加入OUTPOST</h2>
+          <p>OUTPOST直译「前哨」，源自《封神演义》第七九回:「前哨探马报入中军」。它凸显着领先于常人的觉知度与践行力。借鉴李笑来《什么是落后》中「1%之后全是落后」的观点，「前哨」志在成为那1%的人群之一。
+          </p>
+          <p>在<b>OUTPOST</b>，你将加入到一支出类拔萃、积极进取的概念打磨践行团队之中。<p>
+              <p>在这里，每个人都要接受每一个朴素概念的洗礼，都会获得团队成员的支持。在这样一个人人平等、相互尊重的团队环境里，执着的你也有机会与更多战友建立深厚的友谊。这些人脉关系将为你未来的成长率提升之路打下坚实的基础！
+              </p>
+              <p>
+                践行概念并不仅仅意为着要改变自己。事实上，OUTPOST需要你在当下通过践行展示未来的自己，进而打磨属于自己的概念与方法论。
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="our-skills wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+              <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <p class="lead">执行力程度要求</p>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar" aria-valuetransitiongoal="95">95%</div>
+                </div>
+              </div>
+              <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="400ms">
+                <p class="lead">利他要求</p>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar" aria-valuetransitiongoal="75">75%</div>
+                </div>
+              </div>
+              <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+                <p class="lead">多管齐下要求</p>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar" aria-valuetransitiongoal="60">60%</div>
+                </div>
+              </div>
+              <div class="single-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <p class="lead">自学程度要求</p>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary six-sec-ease-in-out" role="progressbar" aria-valuetransitiongoal="85">85%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/#about-us-->
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h2>OUTPOST概念践行故事</h2>
+            <p>从你加入OUTPOST的第一天起，你就已经是OUTPOST大家庭的终身一员。<br/>你在OUTPOST的经历将帮助你实现个人价值并体会到更深层次的人生意义。<br/>同时，这份经历还会为你搭建一个广阔的平台，帮助你在未来取得更大的成功。<br/>无论你在这里践行一个概念还是多个概念，你都会成为OUTPOST理念传承的一部分。</p>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
+              <div class="folio-image">
+                <img class="img-responsive" src="https://ooo.0o0.ooo/2017/04/25/58fea86584d78.jpg" alt="">
+              </div>
+              <div class="overlay">
+                <div class="overlay-content">
+                  <div class="overlay-text">
+                    <div class="folio-info">
+                      <h3>现场演练「教是最好的学」理念</h3>
+                      <p>分享，是OUTPOST成员价值体现的重要原则</p>
+                    </div>
+                    <div class="folio-overview">
+                      <span class="folio-expand">
+                        <a href="https://ooo.0o0.ooo/2017/04/25/58fea865874f4.jpg" data-lightbox="portfolio">
+                          <i class="fa fa-search-plus"></i>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="folio-item wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="400ms">
+              <div class="folio-image">
+                <img class="img-responsive" src="https://ooo.0o0.ooo/2017/04/25/58fea865874f4.jpg" alt="">
+              </div>
+              <div class="overlay">
+                <div class="overlay-content">
+                  <div class="overlay-text">
+                    <div class="folio-info">
+                      <h3>回归笔纸记录</h3>
+                      <p>记录是回顾自己与见证成长轨迹的最好方式</p>
+                    </div>
+                    <div class="folio-overview">
+                      <span class="folio-expand">
+                        <a href="https://farm3.staticflickr.com/2893/33871378050_3cb96b8509_o.jpg" data-lightbox="portfolio">
+                          <i class="fa fa-search-plus"></i>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="500ms">
+              <div class="folio-image">
+                <img class="img-responsive" src="https://ooo.0o0.ooo/2017/04/25/58fea8659e4a7.jpg" alt="">
+              </div>
+              <div class="overlay">
+                <div class="overlay-content">
+                  <div class="overlay-text">
+                    <div class="folio-info">
+                      <h3>OUTPOST成员精湛厨艺展示</h3>
+                      <p>用作品说话是展现能力的有力形式</p>
+                    </div>
+                    <div class="folio-overview">
+                      <span class="folio-expand">
+                        <a href="https://farm3.staticflickr.com/2890/34098121072_d4ab69cd2c_o.jpg" data-lightbox="portfolio">
+                          <i class="fa fa-search-plus"></i>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="folio-item wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="600ms">
+              <div class="folio-image">
+                <img class="img-responsive" src="https://ooo.0o0.ooo/2017/04/25/58fea8659b3c3.jpg" alt="">
+              </div>
+              <div class="overlay">
+                <div class="overlay-content">
+                  <div class="overlay-text">
+                    <div class="folio-info">
+                      <h3>5分钟现场坐享示范</h3>
+                      <p>使大脑皮层表面积加大的朴素刻意训练</p>
+                    </div>
+                    <div class="folio-overview">
+                      <span class="folio-expand">
+                        <a href="https://farm4.staticflickr.com/3952/34214875006_457a681cd9_o.jpg" data-lightbox="portfolio">
+                          <i class="fa fa-search-plus"></i>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="portfolio-single-wrap">
+        <div id="portfolio-single"></div>
+      </div>
+      <!-- /#portfolio-single-wrap -->
+    </section>
+
+    <!--/#portfolio-->
+    <section id="pricing">
+      <div class="container">
+        <div class="row">
+          <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+            <h2>热门概念</h2>
+            <p>在OUTPOST，最有力的概念践行常常发生在工作与生活中。OUTPOST成员与OUTPOST践行指导团队紧密合作。<br/>我们的学徒制模式以及对新加入OUTPOST成员发展的重视将有助于我们对概念践行获得成功。</p>
+          </div>
+        </div>
+        <div class="pricing-table">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>概念</h3>
+                <div class="price">
+                  注意力
+                </div>
+                <ul>
+                  <li>注意力放到成长上</li>
+                  <li>注意力放到真爱上</li>
+                  <li>注意力放到贡献上</li>
+                  <li>重视积累</li>
+                </ul>
+
+                <%= link_to("更多详情", jobs_path, :class => "btn btn-lg btn-primary" ) %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="500ms">
+                <h3>概念</h3>
+                <div class="price">
+                  活在未来
+                </div>
+                <ul>
+                  <li>用现有资源换取未来资源</li>
+                  <li>优质思考是关键</li>
+                  <li>严谨的逻辑是基础</li>
+                  <li>以专业人士标准要求自己</li>
+                </ul>
+                <%= link_to("更多详情", jobs_path, :class => "btn btn-lg btn-primary" ) %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="single-table featured wow flipInY" data-wow-duration="1000ms" data-wow-delay="800ms">
+                <h3>概念</h3>
+                <div class="price">
+                  抱怨
+                </div>
+                <ul>
+                  <li>抱怨是无能与无奈的表现</li>
+                  <li>抱怨导致主动放弃</li>
+                  <li>抱怨有极强杀伤力</li>
+                  <li>珍爱生命远离抱怨</li>
+                </ul>
+
+                <%= link_to("申请践行", jobs_path, :class => "btn btn-lg btn-primary" ) %>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="1100ms">
+                <h3>概念</h3>
+                <div class="price">
+                  错过
+                </div>
+                <ul>
+                  <li>防止「与我无关」的错觉</li>
+                  <li>复述是测试掌握的重要标准</li>
+                  <li>不知道自己错过是最可怕的</li>
+                  <li>主动关联概念</li>
+                </ul>
+                <%= link_to("更多详情", jobs_path, :class => "btn btn-lg btn-primary" ) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/#pricing-->
+
+    <section id="features" class="parallax">
+      <div class="container">
+        <div class="row count">
+          <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <i class="fa fa-users"></i>
+            <h3 class="timer">597</h3>
+            <p>成员支持</p>
+          </div>
+          <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+            <i class="fa fa-bullseye"></i>
+            <h3 class="timer">120</h3>
+            <p>核心概念</p>
+          </div>
+          <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
+            <i class="fa fa-bars"></i>
+            <h3 class="timer">1468</h3>
+            <p>方法论</p>
+          </div>
+          <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
+            <i class="fa fa-flag-checkered"></i>
+            <h3 class="timer">182</h3>
+            <p>里程牌数量</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/#features-->
+
+    <section id="cta2">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">你必须学会作出「自己」的决定，为自己的选择
+          </h2>
+          <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">You must learn to make your own decisions and take full responsibility for your choice.</p>
+          <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
+            <a class="btn btn-primary btn-lg" href="#">
+              <span>负! 全! 责!</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="twitter" class="parallax">
+      <div>
+        <a class="twitter-left-control" href="#twitter-carousel" role="button" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="twitter-right-control" href="#twitter-carousel" role="button" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <div class="twitter-icon text-center"></div>
+              <div id="twitter-carousel" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                  <div class="item active wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <p><img class="img-circle img-thumbnail" src="http://t.cn/RXoU8jB" alt=""></p>
+                    <p>
+                      征程
+                    </p>
+                    <p>「 一切差距，其实都是认知升级的差距。<br/>
+                      看到认知升级，光焦虑无用，你得学会升级自己的认知系统，<br/>进而升级自己的
+                      <a href="#">
+                        <span>操作系统 」</span>。
+                      </a>
+                    </p>
+                  </div>
+                  <div class="item">
+                    <p><img class="img-circle img-thumbnail" src="http://t.cn/RXobqK2" alt=""></p>
+                    <p>
+                      火炎焱燚
+                    </p>
+                    <p>「 我喜欢的人在努力，我的情敌在努力。<br/>
+                      如果我不努力，我怎么配得上她呢？<br/>
+                      <a href="#">
+                        <span>得到一样东西最有效的办法就是让自己配得上它」</span>。
+                      </a>
+                    </p>
+                  </div>
+                  <div class="item">
+                    <p><img class="img-circle img-thumbnail" src="http://t.cn/RXob7P7" alt=""></p>
+                    <p>
+                      Neil
+                    </p>
+                    <p>「 没有完整价值观的人，对待生活只能是应激反应。<br/>
+                      之前太沉迷于时间管理，情绪管理这些术的层面了。
+                      <a href="#">
+
+                        <br/>
+                        <span>重塑价值观，才是当务之急」</span>。
+                      </a>
+                    </p>
+                  </div>
+                  <div class="item">
+                    <p><img class="img-circle img-thumbnail" src="https://farm5.staticflickr.com/4162/34100344702_f29551fdc5_o.jpg" alt=""></p>
+                    <p>
+                      板儿砖
+                    </p>
+                    <p>「 虽然现在自己脑子里的砖头还少，但至少要保证每块儿砖头完整，<br/>砖头之间的关联纹理清晰，耐心砌砖，相信自己会
+                      <a href="#">
+                        <br/>
+                        <span>从板儿砖变为大厦 」</span>。
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/#twitter-->
+
+    <section id="blog">
+      <div class="container">
+        <div class="row">
+          <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+            <h2>特别感谢</h2>
+            <p>在本作品制作的过程中，掉坑无数，因此受益于很多老师的帮助，在此列出他们的名字, 一一表示感谢！没有他们的支持，就没有这个作品的产出。</p>
+          </div>
+        </div>
+        <div class="blog-posts">
+          <div class="row">
+            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+              <div class="post-thumb">
+                <div id="post-carousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#post-carousel" data-slide-to="1"></li>
+                    <li data-target="#post-carousel" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <a href="http://ifp1090-blog.logdown.com/posts/1751999-0426-template-and-on-the-home-page-display-inconsistent-margin-problem-solving"><img class="img-responsive" src="https://farm3.staticflickr.com/2854/34238846256_64ffd90eca_o.jpg" alt=""></a>
+                    </div>
+                    <div class="item">
+                      <a href="http://ifp1090-blog.logdown.com/posts/1751999-0426-template-and-on-the-home-page-display-inconsistent-margin-problem-solving"><img class="img-responsive" src="https://farm3.staticflickr.com/2834/34238851516_8d8eabbce6_o.jpg" alt=""></a>
+                    </div>
+                    <div class="item">
+                      <a href="http://ifp1090-blog.logdown.com/posts/1672508"><img class="img-responsive" src="https://farm3.staticflickr.com/2814/34238854446_3fffa0472f_o.jpg" alt=""></a>
+                    </div>
+                  </div>
+                  <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </div>
+                <div class="post-meta">
+                  <span>
+                    <i class="fa fa-graduation-cap"></i>
+                    助教老师</span>
+                  <span>解决
+                    <i class="fa fa-question-circle"></i>
+                  </span>5个
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+              <div class="post-thumb">
+                <div id="post-carousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#post-carousel" data-slide-to="1"></li>
+                    <li data-target="#post-carousel" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <a href="https://forum.qzy.camp/t/bootstrap/504"><img class="img-responsive" src="https://farm3.staticflickr.com/2855/33437835824_8081cacf0f_o.jpg" alt=""></a>
+                    </div>
+                    <div class="item">
+                      <a href="https://forum.qzy.camp/t/rails-css-js/822/2"><img class="img-responsive" src="https://farm3.staticflickr.com/2947/34239217516_5f524b634a_o.jpg" alt=""></a>
+                    </div>
+                    <div class="item">
+                      <a href="https://forum.qzy.camp/t/kk-15/437"><img class="img-responsive" src="https://farm3.staticflickr.com/2950/34239221986_77047d9c2e_o.jpg" alt=""></a>
+                    </div>
+                  </div>
+                  <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </div>
+                <div class="post-meta">
+                  <span>
+                    <i class="fa fa-share-alt"></i>
+                    论坛分享</span>
+                  <span>文章
+                    <i class="fa fa-file-text-o"></i>
+                  </span>3篇
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+              <div class="post-thumb">
+                <div id="post-carousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#post-carousel" data-slide-to="1"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <a href="http://newjob.herokuapp.com/"><img class="img-responsive" src="https://farm3.staticflickr.com/2942/33438240044_a0545a5f0e_o.jpg" alt=""></a>
+                    </div>
+                    <div class="item">
+                      <a href="https://nameless-taiga-50514.herokuapp.com/"><img class="img-responsive" src="https://farm5.staticflickr.com/4174/33438244444_8c6bfdd34e_o.jpg" alt=""></a>
+                    </div>
+                  </div>
+                  <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </div>
+                <div class="post-meta">
+                  <span>
+                    <i class="fa fa-diamond"></i>
+                    模板学习</span>
+                  <span>样例
+                    <i class="fa fa-object-ungroup"></i>
+                  </span>2个
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <!--/#blog-->
+
+      <section id="contact">
+        <div id="contact-us" class="parallax">
+          <div class="container">
+            <div class="row">
+              <div class="heading text-center  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h2>联系我们</h2>
+              </div>
+            </div>
+            <div class="row text-center">
+              <ul class="address">
+                <li>
+                  <i class="fa fa-map-marker"></i>
+                  <span>
+                    地址:</span>
+                  中国上海市杨浦区大连路588号宝地广场A座
+                </li>
+                <li>
+                  <i class="fa fa-phone"></i>
+                  <span>
+                    电话:</span>
+                  021-12345678
+                </li>
+                <li>
+                  <i class="fa fa-envelope"></i>
+                  <span>
+                    Email:</span>
+                  <a href="mailto:someone@yoursite.com">
+                    norekcn@gmail.com</a>
+                </li>
+                <li>
+                  <i class="fa fa-globe"></i>
+                  <span>
+                    Website:</span>
+                  <a href="#">www.outpost.com</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--/#contact-->
+
+      <script type="text/javascript" src="app/assets/javascripts/jquery.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/bootstrap.min.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/jquery.inview.min.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/wow.min.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/mousescroll.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/smoothscroll.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/jquery.countTo.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/lightbox.min.js"></script>
+      <script type="text/javascript" src="app/assets/javascripts/main.js"></script>
+
+    </body>
+
+  </html>
+  <script type="text/javascript" src="app/assets/javascripts/jquery.countTo.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/lightbox.min.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/main.js"></script>
+
+</body>
+
+</html>

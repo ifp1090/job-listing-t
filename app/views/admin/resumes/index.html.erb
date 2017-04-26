@@ -1,0 +1,14 @@
+<div class="container">
+	<h2>
+		<%= @job.title %>
+		- 践行申请列表
+	</h2>
+
+	<hr>
+
+	<% if @resumes.length > 0 %>
+	<%= render :partial => "resume", :collection => @resumes, :as => :resume %>
+<% else %>
+	<p class="empty-message">目前还未收到践行申请</p>
+	<% end %>
+</div>

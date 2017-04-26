@@ -1,0 +1,41 @@
+<div class="container">
+  <br/>
+  <div class="container">
+    <div class="content">
+      <h2 style="text-align: center;">已申请践行的概念</h2>
+
+      <% if @jobs.length > 0 %>
+      <table class="table table-hover table-boldered table-striped custab">
+        <thead>
+          <tr>
+            <th>概念名称</th>
+            <th>践行城市</th>
+            <th>践行时段</th>
+            <th>发布时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @jobs.each do |job| %>
+          <tr>
+            <td><%= link_to(job.title, job_path(job)) %></td>
+            <td><%= link_to(job.category_name, "/jobs/search?utf8=✓&q=" + job.category_name) %></td>
+            <td>
+              <span class="label label-default"><%= job.wage_lower_bound %>天 -
+                <%= job.wage_upper_bound %>天</span>
+            </td>
+            <td><%= formatDate(job.created_at) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%= will_paginate @jobs %>
+      </div>
+    <% else %>
+      <p class="empty-message">践行申请尚未提交
+        <%= link_to("点我查阅N多目前正在打磨的热门概念！", jobs_path, class: "btn btn-success") %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

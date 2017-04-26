@@ -1,0 +1,37 @@
+<% if current_page?('jobss_path') %>
+<nav class="navbar navbar-default transparent" role="navigation" id="navbar">
+<% else %>
+  <nav class="main-nav" role="navigation">
+    <% end %>
+    <div class="container">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><img src="https://farm4.staticflickr.com/3954/34101927312_6306961d23_o.png"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to('首页', root_path) %></li>
+            <li><%= link_to('概念列表', jobs_path) %></li>
+            <% if !current_user %>
+            <li><%= link_to("注册", new_user_registration_path) %></li>
+            <li><%= link_to("登录", new_user_session_path) %></li>
+          <% else %>
+            <% if current_user && current_user.admin? %>
+            <li><%= link_to("后台管理", admin_account_jobs_path) %></li>
+          <% else %>
+            <li><%= link_to("已投递申请的概念", account_jobs_path) %></li>
+            <% end %>
+            <li><%= link_to("退出", destroy_user_session_path, method: :delete) %></li>
+          </ul>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+</nav>

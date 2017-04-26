@@ -1,0 +1,17 @@
+<div class="container">
+  <h3>
+    提交践行申请计划到→
+    <%= @job.title %>
+  </h3>
+  <hr>
+  <%= simple_form_for [@job, @resume] do |f| %>
+  <%= f.input :content, label:"自我说明", placeholder: "三句话表述清楚你为什么要践行这个概念，你的践行目标是什么，以及你打算如何践行" %>
+
+  <%= f.input :attachment, label:"你的详细践行计划书" %>
+  <p class="help-block">
+    <small>请上传.md/.pdf/.docx/.html文件</small>
+  </p>
+  <br/>
+  <%= f.submit "提交", class: "btn btn-success" %>
+  <% end %>
+</div>

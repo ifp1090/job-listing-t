@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="container">
+    <h1>
+      新增概念
+    </h1>
+    <hr/>
+
+    <%= simple_form_for @job do |f| %>
+    <div class="form-group">
+      <%= f.input :title, :label => "概念名称", input_html: { class: "form-control"} %>
+      <%= f.input :description, :label => "概念内容", input_html: { class: "form-control"} %>
+      <%= f.input :company_name, :label => "践行标准", input_html: { class: "form-control" rows="3"} %>
+      <%= f.input :wage_lower_bound, :label => "最高践行时长", input_html: { class: "form-control"} %>
+      <%= f.input :wage_upper_bound, :label => "最低践行时长", input_html: { class: "form-control"} %>
+      <%= f.input :contact_email, :label => "联系邮箱", input_html: { class: "form-control"} %>
+    </div>
+    <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+    <% end %>
+  </div>
+</div>

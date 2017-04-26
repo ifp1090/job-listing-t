@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="search-result">
+    <%= link_to(jobs_path, class: "btn btn-success back-btn ") do  %>
+    <span class="fa fa-arrow-left" style="margin-right: 10px;"></span>返回概念列表
+    <% end %>
+
+    <% if @jobs.length > 0 %>
+    <table class="table table-hover table-boldered table-striped custab">
+      <thead>
+        <tr>
+          <th>概念名称</th>
+          <th>践行城市</th>
+          <th>践行时限</th>
+          <th>发布时间</th>
+          <% if !current_user || !current_user.is_admin? %>
+          <th>申请践行</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs.each do |job| %>
+        <tr>
+          <td><%= link_to(job.title, job_path(job)) %></td>
+          <td>
+            <%= job.category_name %>
+          </td>
+          <td>
+            <span class="label label-default"><%= job.wage_lower_bound %>天 -
+              <%= job.wage_upper_bound %>天</span>
+          </td>
+          <td><%= formatDate(job.created_at) %></td>
+          <% if !current_user || !current_user.is_admin? %>
+          <td><%= render 'resume_btn', :job => job %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="text-center">
+      <%= will_paginate @jobs %>
+    </div>
+
+  <% else %>
+    <p class="empty-message">Sorry，没有搜到相关概念，我们将尽快更新概念，感谢关注！</p>
+    <% end %>
+  </div>
+</div>

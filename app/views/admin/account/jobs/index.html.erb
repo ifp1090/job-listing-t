@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="group">
+    <%= link_to("新增概念", new_admin_account_job_path, class: "btn btn-success pull-right") %>
+  </div>
+
+  <% if @jobs.length > 0 %>
+  <table class="table table-hover table-boldered table-striped custab">
+    <thead>
+      <tr>
+        <th>概念名称</th>
+        <th>收到践行申请数</th>
+        <th>践行城市</th>
+        <th>践行时限</th>
+        <th>发布时间</th>
+        <th>概念管理</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+      <tr>
+        <td>
+          <%= render_job_status(job) %>
+          <%= link_to(job.title, job_path(job)) %>
+        </td>
+        <td>
+          <%= link_to(job.resumes.count, admin_job_resumes_path(job)) %>
+        </td>
+        <td>
+          <%= job.category_name %>
+        </td>
+        <td>
+          <span class="label label-default"><%= job.wage_lower_bound %>天 -
+            <%= job.wage_upper_bound %>天</span>
+        </td>
+        <td><%= formatTime(job.created_at) %></td>
+        <td>
+          <%= link_to edit_admin_account_job_path(job), class: "btn btn-xs btn-info" do %>
+          <span class="fa fa-pencil"></span>
+          <% end %>
+
+          <% if job.is_hidden %>
+          <%= link_to publish_admin_account_job_path(job) , :method => :post, :class => "btn btn-xs btn-success" do %>
+          <span class="fa fa-eye"></span><% end %>
+        <% else %>
+          <%= link_to hide_admin_account_job_path(job), :method => :post,  :class => "btn btn-xs btn-warning" do %>
+          <span class="fa fa-eye-slash"></span><% end %>
+          <% end %>
+
+          <%= link_to admin_account_job_path(job), :method => :delete, :class => "btn btn-xs  btn-danger", :data => { :confirm => "Are you sure?" } do %>
+          <span class="fa fa-trash"></span>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%= will_paginate @jobs %>
+  </div>
+<% else %>
+  <p class="empty-message">还未发布任何概念召集，赶紧添加一个概念试试！</p>
+  <% end %>
+</div>
