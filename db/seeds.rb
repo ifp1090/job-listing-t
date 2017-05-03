@@ -37,8 +37,8 @@ company_name = [
 ]
 
 
-create_jos = for i in 1..10 do
-  Job.create!([
+create_jobs = for i in 1..10 do
+  Job.create([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
     description: "这是用种子建立的第 #{i} 个Public概念",
@@ -52,8 +52,8 @@ end
 
 puts "10 Public jobs created."
 
-create_jos = for i in 1..10 do
-  Job.create!([
+create_jobs = for i in 1..10 do
+  Job.create([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
     description: "这是用种子建立的第 #{i+10} 个hidden概念",
