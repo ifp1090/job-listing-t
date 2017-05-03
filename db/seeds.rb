@@ -1,6 +1,6 @@
 puts "这个种子档会自动建立一个admin账号，并且创建 10 个public jobs，以及10个hidden jobs"
 
-create_account = User.create([email: 'raimonfuns@163.com', password: '123123', password_confirmation: '123123', is_admin: 'true'])
+create_account = User.create([email: '4@4.com', password: '111111', password_confirmation: '111111', is_admin: 'true'])
 puts "Admin account created."
 
 jobs = [
@@ -29,7 +29,7 @@ create_jos = for i in 1..10 do
   Job.create!([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
-    description: "这是用种子建立的第 #{i} 个Public工作哦",
+    description: "这是用种子建立的第 #{i} 个Public概念",
     wage_upper_bound: rand(50..99)*100 + 5000,
     wage_lower_bound: rand(10..49)*100 + 5000,
     contact_email: 'raimonfuns@163.com',
@@ -44,7 +44,7 @@ create_jos = for i in 1..10 do
   Job.create!([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
-    description: "这是用种子建立的第 #{i+10} 个hidden工作哦",
+    description: "这是用种子建立的第 #{i+10} 个hidden概念",
     wage_upper_bound: rand(50..99)*100 + 5000,
     wage_lower_bound: rand(10..49)*100 + 5000,
     contact_email: 'raimonfuns@163.com',
