@@ -38,7 +38,7 @@ company_name = [
 
 
 create_jobs = for i in 1..10 do
-  Job.create([
+  Job.create!([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
     description: "这是用种子建立的第 #{i} 个Public概念",
@@ -46,14 +46,16 @@ create_jobs = for i in 1..10 do
     wage_lower_bound: rand(10..49)*100 + 5000,
     contact_email: '4@4.com',
     is_hidden: "false",
-    category_id: category[rand(category.length)]
+    category_id: category[rand(category.length)],
+    company_name: "定投策略：定期等额购买某一支（或几只）成长型股票。",
   ])
+
 end
 
 puts "10 Public jobs created."
 
 create_jobs = for i in 1..10 do
-  Job.create([
+  Job.create!([
     title: jobs[rand(jobs.length)],
     # title: "JOB.no#{i}",
     description: "这是用种子建立的第 #{i+10} 个hidden概念",
@@ -61,22 +63,8 @@ create_jobs = for i in 1..10 do
     wage_lower_bound: rand(10..49)*100 + 5000,
     contact_email: '4@4.com',
     is_hidden: "true",
-    category_id: category[rand(category.length)]
+    category_id: category[rand(category.length)],
+    company_name: "定投策略：定期等额购买某一支（或几只）成长型股票。",
   ])
 end
 puts "10 Hidden jobs created."
-
-create_jobs = for i in 1..10 do
-  Job.create([
-    title: jobs[rand(jobs.length)],
-    # title: "JOB.no#{i}",
-    description: "这是用种子建立的第 #{i+10} 个Public概念",
-    wage_upper_bound: rand(50..99)*100 + 5000,
-    wage_lower_bound: rand(10..49)*100 + 5000,
-    contact_email: '4@4.com',
-    is_hidden: "false",
-    category_id: category[rand(category.length)]
-    company_name: "定投策略：定期等额购买某一支（或几只）成长型股票。"
-  ])
-end
-puts "10 Public company_name created."

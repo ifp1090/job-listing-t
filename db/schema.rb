@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170125065153) do
     t.string   "company_url"
     t.string   "company_contact_email"
     t.string   "category"
-    t.string   "category_name",         default: "技术"
+    t.string   "category_name",
     t.integer  "user_id"
   end
 
